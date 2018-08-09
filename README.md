@@ -1,6 +1,6 @@
-#ProjectX
+# ProjectX
 
 hxc encylopedia inspired by Encylopaedia Metallum
 
-##TODO
+## TODO
 - [ ] Decide on and setup React component library
