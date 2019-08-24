@@ -1,31 +1,48 @@
 import Avatar from '@material-ui/core/Avatar'
-import React from 'react';
+import Divider from '@material-ui/core/Divider'
+import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import StarIcon from '@material-ui/icons/Star';
+import React from 'react';
+import {withStyles} from '@material-ui/core/styles'
 
-export const recentlyUpdated = (
-  <div>
-    <ListItem>
-      <ListItemText primary="Recently Updated" />
-    </ListItem>
-  </div>
-);
+const styles = (theme) => {
+  return{
 
-export const bands = (
-  <div>
-    <ListItem button>
-      <Avatar src={require('../img/garage-band.png')}/>
-      <ListItemText primary="Siege" />
-    </ListItem>
-    <ListItem button>
-      <Avatar src={require('../img/garage-band.png')}/>
-      <ListItemText primary="Bane" />
-    </ListItem>
-    <ListItem button>
-      <Avatar src={require('../img/garage-band.png')}/>
-      <ListItemText primary="7 Seconds" />
-    </ListItem>
-  </div>
-);
+  }
+}
+
+class RightDrawerItems extends React.Component {
+  state = {
+
+  }
+
+  render() {
+    const {classes, darkMode} = this.props
+
+    return(
+      <div>
+        <List component='nav'>
+        <ListItem>
+          <ListItemText primary="Recently Updated" />
+        </ListItem>
+        <Divider/>
+        <ListItem button>
+          <Avatar src={require(darkMode ? '../img/garage-bandWhite.png' : '../img/garage-band.png')}/>
+          <ListItemText style={{marginLeft: 10}} primary="Siege" />
+        </ListItem>
+        <ListItem button>
+          <Avatar src={require(darkMode ? '../img/garage-bandWhite.png' : '../img/garage-band.png')}/>
+          <ListItemText style={{marginLeft: 10}} primary="Bane" />
+        </ListItem>
+        <ListItem button>
+          <Avatar src={require(darkMode ? '../img/garage-bandWhite.png' : '../img/garage-band.png')}/>
+          <ListItemText style={{marginLeft: 10}} primary="7 Seconds" />
+        </ListItem>
+        </List>
+      </div>
+    )
+  }
+}
+
+export default (withStyles(styles)(RightDrawerItems))

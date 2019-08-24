@@ -7,12 +7,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
-import Help from '@material-ui/icons/Help'
 import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
@@ -21,9 +18,18 @@ const styles = theme => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
-  nested: {
-    paddingLeft: theme.spacing.unit * 4,
+  rootDark: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: 'black',
+    color: 'white'
   },
+  listItemText: {
+    marginLeft: 10
+  },
+  starDark: {
+    color: 'white'
+  }
 });
 
 class LeftDrawerItems extends React.Component {
@@ -34,52 +40,52 @@ class LeftDrawerItems extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, darkMode } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div className={darkMode ? classes.rootDark: classes.root}>
         <List
           component="nav"
         >
           <ListItem button onClick={this.handleClick}>
-            <Avatar src={require("../img/garage-band.png")}/>
-            <ListItemText inset primary="Bands" />
+            <Avatar src={require(darkMode ? '../img/garage-bandWhite.png' : '../img/garage-band.png')}/>
+            <ListItemText className={classes.listItemText} primary="Bands" />
             {this.state.open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem button className={classes.nested}>
+              <ListItem button>
                 <ListItemIcon>
-                  <StarBorder />
+                  <StarBorder className={darkMode ? classes.starDark : null}/>
                 </ListItemIcon>
-                <ListItemText inset primary="Alphabetical" />
+                <ListItemText primary="Alphabetical" />
               </ListItem>
-              <ListItem button className={classes.nested}>
+              <ListItem button>
                 <ListItemIcon>
-                  <StarBorder />
+                  <StarBorder className={darkMode ? classes.starDark : null}/>
                 </ListItemIcon>
-                <ListItemText inset primary="Subgenre" />
+                <ListItemText primary="Subgenre" />
               </ListItem>
-              <ListItem button className={classes.nested}>
+              <ListItem button>
                 <ListItemIcon>
-                  <StarBorder />
+                  <StarBorder className={darkMode ? classes.starDark : null}/>
                 </ListItemIcon>
-                <ListItemText inset primary="Country" />
+                <ListItemText primary="Country" />
               </ListItem>
             </List>
           </Collapse>
           <ListItem button>
-            <Avatar src={require('../img/vinyl.png')}/>
-            <ListItemText inset primary="Labels" />
+            <Avatar src={require(darkMode ? '../img/vinylWhite.png' : '../img/vinyl.png')}/>
+            <ListItemText className={classes.listItemText} primary="Labels" />
           </ListItem>
           <ListItem button>
-            <Avatar src={require('../img/document.png')}/>
-            <ListItemText inset primary="Reviews" />
+            <Avatar src={require(darkMode ? '../img/documentWhite.png' : '../img/document.png')}/>
+            <ListItemText className={classes.listItemText} primary="Reviews" />
           </ListItem>
           <Divider />
           <ListItem button>
-            <Avatar src={require('../img/question-mark.png')}/>
-            <ListItemText primary='Random Band' />
+            <Avatar src={require(darkMode ? '../img/question-markWhite.png' : '../img/question-mark.png')}/>
+            <ListItemText className={classes.listItemText} primary='Random Band' />
           </ListItem>
         </List>
       </div>
