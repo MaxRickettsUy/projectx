@@ -4,21 +4,10 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles'
-
-const styles = (theme) => {
-  return{
-
-  }
-}
 
 class RightDrawerItems extends React.Component {
-  state = {
-
-  }
-
   render() {
-    const {classes, darkMode} = this.props
+    const {darkMode} = this.props
 
     return(
       <div>
@@ -45,4 +34,4 @@ class RightDrawerItems extends React.Component {
   }
 }
 
-export default (withStyles(styles)(RightDrawerItems))
+export default RightDrawerItems

@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import {fade} from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import {withStyles} from '@material-ui/core/styles'
 
@@ -90,7 +90,7 @@ class TopBar extends React.Component {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div>
-            <Button variant='contained' color='default' onClick={this.props.setDarkMode}><DarkMode/></Button>
+            <Button variant='contained' style={{marginLeft: 10}} color='default' onClick={this.props.setDarkMode}><DarkMode/></Button>
           </Toolbar>
         </AppBar>
       </div>

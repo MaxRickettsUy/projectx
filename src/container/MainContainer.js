@@ -1,17 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List'
+import Drawer from '@material-ui/core/Drawer';
+import Grid from '@material-ui/core/Grid'
 import LeftDrawerItems from '../component/LeftDrawerItems'
 import Paper from '@material-ui/core/Paper'
+import PropTypes from 'prop-types';
+import React from 'react';
 import RightDrawerItems from '../component/RightDrawerItems'
+import Toolbar from '@material-ui/core/Toolbar';
 import TopBar from '../component/TopBar'
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+
 const drawerWidth = 240;
+
+
 
 const styles = theme => ({
   root: {
@@ -64,22 +66,35 @@ const styles = theme => ({
     color: 'inherit',
   },
   paper: {
-    height: '88%',
+    height: 'auto',
+    padding: theme.spacing(3)
   },
   paperDark: {
-    height: '88%',
+    height: 'auto',
     backgroundColor: 'black',
     color: 'white',
-    border: '1px solid white'
+    border: '1px solid white',
+    padding: theme.spacing(3)
   },
   mobilePaper: {
-    height: '82%'
+    height: 'auto',
+    padding: theme.spacing(3)
   },
   mobilePaperDark: {
-    height: '82%',
+    height: 'auto',
     backgroundColor: 'black',
     color: 'white',
-    border: '1px solid white'
+    border: '1px solid white',
+    padding: theme.spacing(3)
+  },
+  paperBand: {
+    height: 140,
+    width: '100%',
+    backgroundColor: 'black'
+  },
+  paperBandImage: {
+    height: 140,
+    width: '100%',
   }
 });
 
@@ -108,8 +123,28 @@ class MainContainer extends React.Component {
               <main className={darkMode ? classes.contentDark : classes.content}>
                 <div className={classes.toolbar} />
                 <Paper className={darkMode ? classes.mobilePaperDark : classes.mobilePaper}>
-                  <Typography noWrap>{'Welcome to hardXchives! A hardcore-punk discography and review collection site'}</Typography>
-                  <Typography noWrap>{'Welcome to hardXchives! A hardcore-punk discography and review collection site'}</Typography>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                      <Grid container justify='center'>
+                        <Typography>{'Welcome to hardXchives! A hardcore-punk discography and review collection site'}</Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container justify='center'>
+                        <Typography noWrap>{'Check out these bands!'}</Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid container justify='center' spacing={2}>
+                    <Grid item xs={12}>
+                      <Paper className={classes.paperBand}>
+                          <img src={require('../img/logo/siege.jpg')} alt='Siege' className={classes.paperBandImage}/>
+                      </Paper>
+                    </Grid>
+                    <Grid item xs={12}><Paper className={classes.paperBand}/></Grid>
+                    <Grid item xs={12}><Paper className={classes.paperBand}/></Grid>
+                    <Grid item xs={12}><Paper className={classes.paperBand}/></Grid>
+                  </Grid>
                 </Paper>
               </main>
               <AppBar position='fixed' className={classes.bottomBar}>
@@ -133,8 +168,46 @@ class MainContainer extends React.Component {
               <main className={darkMode ? classes.contentDark : classes.content}>
                 <div className={classes.toolbar} />
                 <Paper className={darkMode ? classes.paperDark : classes.paper}>
-                  <Typography noWrap>{'Welcome to hardXchives! A hardcore-punk discography and review collection site'}</Typography>
-                  <Typography noWrap>{'Welcome to hardXchives! A hardcore-punk discography and review collection site'}</Typography>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                      <Grid container justify='center'>
+                        <Typography noWrap>{'Welcome to hardXchives! A hardcore-punk discography and review collection site'}</Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container justify='center'>
+                        <Typography noWrap>{'Check out these bands!'}</Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container justify='center' spacing={2}>
+                        <Grid item xs={3}>
+                          <Paper className={classes.paperBand}>
+                              <img src={require('../img/logo/siege.jpg')} alt='Siege' className={classes.paperBandImage}/>
+                          </Paper>
+                        </Grid>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container justify='center' spacing={2}>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container justify='center' spacing={2}>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                        <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </Paper>
               </main>
               <Drawer
