@@ -1,5 +1,11 @@
 import Button from '@material-ui/core/Button'
+import Create from '@material-ui/icons/Create'
 import DarkMode from '@material-ui/icons/InvertColors'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,7 +13,11 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import {fade} from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import Switch from '@material-ui/core/Switch'
+import TextField from '@material-ui/core/TextField'
+import Tooltip from '@material-ui/core/Tooltip'
 import {withStyles} from '@material-ui/core/styles'
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 const styles =(theme) => {
   return {
@@ -68,32 +78,83 @@ const styles =(theme) => {
 }
 
 class TopBar extends React.Component {
-  render(){
-    const {classes} = this.props
+  state = {
+    open: false,
+  }
+
+  handleDialog = () => {
+    this.setState({
+      ...this.state,
+      open: !this.state.open
+    })
+  }
+
+
+  hardChives = () => {
     return (
-      <div>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <Typography className={classes.title} noWrap>
-              hardXchives
-            </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
+      <Typography className={this.props.classes.title} noWrap>
+        hardXchives
+      </Typography>
+    )
+  }
+
+  render(){
+    const {classes, darkMode} = this.props
+    const {open} = this.state
+    return (
+      <Router>
+        <div>
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              <Route path='/' exact component={this.hardChives}></Route>
+              <Tooltip title='Add new band'>
+                <Button 
+                  variant='contained' 
+                  color='default' 
+                  onClick={this.handleDialog}>
+                    <Create/>
+                </Button>
+              </Tooltip>
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
               </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
-            <Button variant='contained' style={{marginLeft: 10}} color='default' onClick={this.props.setDarkMode}><DarkMode/></Button>
-          </Toolbar>
-        </AppBar>
-      </div>
+              <Tooltip title='Toggle dark mode'><Switch onClick={this.props.setDarkMode}></Switch></Tooltip>
+              <Dialog open={open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Add New Band</DialogTitle>
+                <DialogContent>
+                  <DialogContentText></DialogContentText>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Band Name"
+                    type="email"
+                    fullWidth
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={this.handleDialog} color="primary">
+                    Cancel
+                  </Button>
+                  <Button onClick={this.handleDialog} color="primary">
+                    Submit
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Toolbar>
+          </AppBar>
+        </div>
+      </Router>
     )
   }
 }

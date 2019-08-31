@@ -13,8 +13,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
 
-
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -90,7 +88,8 @@ const styles = theme => ({
   paperBand: {
     height: 140,
     width: '100%',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    border: '1px solid white'
   },
   paperBandImage: {
     height: 140,
@@ -116,7 +115,7 @@ class MainContainer extends React.Component {
     const { darkMode } = this.state;
     return (
       <div className={classes.root}>
-        <TopBar setDarkMode={this.setDarkMode}/>
+        <TopBar darkMode={darkMode} setDarkMode={this.setDarkMode}/>
         {
           isMobile ?
             <React.Fragment>
