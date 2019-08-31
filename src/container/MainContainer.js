@@ -1,4 +1,5 @@
 import AppBar from '@material-ui/core/AppBar';
+import {connect} from 'react-redux'
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid'
 import LeftDrawerItems from '../component/LeftDrawerItems'
@@ -6,6 +7,7 @@ import Paper from '@material-ui/core/Paper'
 import PropTypes from 'prop-types';
 import React from 'react';
 import RightDrawerItems from '../component/RightDrawerItems'
+import {getBands} from '../actions/bands'
 import Toolbar from '@material-ui/core/Toolbar';
 import TopBar from '../component/TopBar'
 import Typography from '@material-ui/core/Typography';
@@ -111,11 +113,11 @@ class MainContainer extends React.Component {
 
   render(){
     const isMobile = window.innerWidth <= 500
-    const { classes } = this.props;
+    const { classes, getBands } = this.props;
     const { darkMode } = this.state;
     return (
       <div className={classes.root}>
-        <TopBar darkMode={darkMode} setDarkMode={this.setDarkMode}/>
+        <TopBar darkMode={darkMode} getBands={getBands} setDarkMode={this.setDarkMode}/>
         {
           isMobile ?
             <React.Fragment>
@@ -231,4 +233,12 @@ MainContainer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MainContainer);
+const mapStateToProps = (state) => ({
+  ...state
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  getBands: () => dispatch(getBands())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MainContainer));

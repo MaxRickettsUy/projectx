@@ -1,6 +1,5 @@
 import Button from '@material-ui/core/Button'
 import Create from '@material-ui/icons/Create'
-import DarkMode from '@material-ui/icons/InvertColors'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -87,6 +86,7 @@ class TopBar extends React.Component {
       ...this.state,
       open: !this.state.open
     })
+    this.props.getBands()
   }
 
 
@@ -99,7 +99,7 @@ class TopBar extends React.Component {
   }
 
   render(){
-    const {classes, darkMode} = this.props
+    const {classes} = this.props
     const {open} = this.state
     return (
       <Router>
