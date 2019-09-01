@@ -7,6 +7,13 @@ router.route('/').get((req, res) => {
     .catch(error => res.status(400).json('Error: ' + error));
 });
 
+router.route('/:bandName').get((req, res) => {
+    Band.findOne({bandName: req.params.bandName})
+    .then(band => res.json(band))
+    .catch(error => res.status(400).json('Error: '+ error))
+
+})
+
 router.route('/add').post((req, res) => {
     const bandName = req.body.bandName;
 

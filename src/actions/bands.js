@@ -14,7 +14,7 @@ export const getBands = () => {
 
 export const getBandName = (bandName) => {
   return (dispatch) =>{
-    return axios.get('http://localhost:5000/bands/bandName')
+    return axios.get('http://localhost:5000/bands/' +  bandName)
     .then(response => {
       dispatch(createGetSuccess('GET_BAND_NAME', response.data))
     })
@@ -26,7 +26,8 @@ export const getBandName = (bandName) => {
 
 export const createGetSuccess = (actionType, data) => {
   let actionData = {};
-
+  console.log(actionType)
+  console.log(data)
   switch(actionType){
     case 'GET_BANDS': 
       actionData = data;

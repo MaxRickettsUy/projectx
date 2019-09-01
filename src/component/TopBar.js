@@ -43,7 +43,6 @@ const styles =(theme) => {
       '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
       },
-      marginLeft: 0,
       width: '50%',
       [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(1),
@@ -86,33 +85,26 @@ class TopBar extends React.Component {
       ...this.state,
       open: !this.state.open
     })
-    this.props.getBands()
-  }
-
-
-  hardChives = () => {
-    return (
-      <Typography className={this.props.classes.title} noWrap>
-        hardXchives
-      </Typography>
-    )
+    this.props.getBandName('Siege')
   }
 
   render(){
-    const {classes} = this.props
+    const {classes, isMobile} = this.props
     const {open} = this.state
     return (
       <Router>
         <div>
           <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
-              <Route path='/' exact component={this.hardChives}></Route>
+              <Typography className={this.props.classes.title} noWrap>
+                {isMobile ? 'hXc' : 'hardXchives'}
+              </Typography>
               <Tooltip title='Add new band'>
                 <Button 
-                  variant='contained' 
-                  color='default' 
+                  variant='contained'
+                  style={{backgroundColor: 'black'}}
                   onClick={this.handleDialog}>
-                    <Create/>
+                    <Create style={{color: 'white'}}/>
                 </Button>
               </Tooltip>
               <div className={classes.search}>
