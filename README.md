@@ -3,4 +3,7 @@
 hxc encylopedia inspired by Encylopaedia Metallum
 
 ## TODO
-- [ ] Decide on and setup React component library
+- [X] Decide on and setup React component library
+- [X] set up routes
+- [X] set up redux
+- [ ] security
