@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid'
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
@@ -102,8 +102,7 @@ class BandPage extends React.Component {
   }
 
   render(){
-    const {classes} = this.props
-    const {darkMode} = this.state
+    const {classes, darkMode} = this.props
     return(
       <main className={darkMode ? classes.contentDark : classes.content}>
       <div style={{width: '100%', height: 50}} />
@@ -111,7 +110,32 @@ class BandPage extends React.Component {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Grid container justify='center'>
-              <h1>Siege</h1>
+              <img src={require('../img/logo/siege.jpg')} alt='Siege'/>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
+      <Paper className={darkMode ? classes.paperDark : classes.paper}>
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
+            <Grid container justify='center'>
+              <Link to="/albums/Siege/Drop Dead">
+                <img src={require('../img/covers/Siege_dropdead.jpg')} alt="Drop Dead" style={{width: 300, height: 300}}/>
+              </Link>
+              <p>Drop Dead (1984)</p>
+            </Grid>
+          </Grid>
+          <Grid item xs={4}>
+            <Grid container justify='center'>
+              <Link to="/albums/Siege/Lost Session 91">
+                <img src={require('../img/covers/siege_lostsession91.jpg')} alt="Drop Dead" style={{width: 300, height: 300}}/>
+              </Link>
+              <p>Lost Session '91 (2014)</p>
+            </Grid>
+          </Grid>
+          <Grid item xs={4}>
+            <Grid container justify='center'>            
+              <Paper>Album</Paper>
             </Grid>
           </Grid>
         </Grid>

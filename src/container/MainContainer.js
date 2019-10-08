@@ -162,7 +162,7 @@ class MainContainer extends React.Component {
                       </Paper>
                     </main>
                   </Route>
-                  <Route exact path='/bands/Siege' component={BandPage}/>
+                  <Route exact path='/bands/Siege' component={BandPage} darkMode={darkMode}/>
                 </Switch>
                 <AppBar position='fixed' className={classes.bottomBar}>
                   <Toolbar>
@@ -251,7 +251,7 @@ class MainContainer extends React.Component {
                       </Paper>
                     </main>
                   </Route>
-                  <Route exact path="/bands/Siege" component={BandPage}/>
+                  <Route exact path="/bands/Siege" render={() => {return <BandPage darkMode={darkMode}/>}}/>
                 </Switch>
                 <Drawer
                   variant="permanent"
