@@ -1,4 +1,4 @@
-# ProjectX
+# ProjectX (hardXchives)
 
 hxc encylopedia inspired by Encylopaedia Metallum
 
