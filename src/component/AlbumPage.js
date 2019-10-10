@@ -1,8 +1,8 @@
-import AlbumPage from './AlbumPage'
 import Grid from '@material-ui/core/Grid'
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import React from 'react';
+import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
@@ -97,70 +97,51 @@ const styles = theme => ({
   }
 });
 
-class BandPage extends React.Component {
+class AlbumPage extends React.Component {
   state = {
     darkMode: false
-  }
-
-  stringSpaces = (value) => {
-    return value.replace(/\s/g, '');
   }
 
   render(){
     const {classes, darkMode} = this.props
 
-    //replace with band prop
     const band = 'Siege'
-
-
-    //replace with album information for band from api
-    const albums = [
-      {
-        name: 'Drop Dead', 
-        year: 1984
-      },
-      {
-        name: 'Lost Session 91',
-        year: 2014
-      }
+    const albumName = 'Drop Dead'
+    const cover = '../../img/covers/' + band.toLowerCase() + '_' + albumName.toLowerCase().replace(/\s/g, '') + '.jpg'
+    const trackList = [
+      'Drop Dead',
+      'Conform',
+      'Life of Hate',
+      'Starvation',
+      'Armageddon',
+      'Grim Reaper'
     ]
 
     return(
       <main className={darkMode ? classes.contentDark : classes.content}>
-        <div style={{width: '100%', height: 50}} />
-        <Paper className={darkMode ? classes.paperDark : classes.paper}>
-          <Grid container spacing={3} justify='center'>
-            <Grid item xs={12}>
-              <Grid container justify='center'>
-                <img src={require('../img/logo/siege.jpg')} alt='Siege'/>
-              </Grid>
+      <div style={{width: '100%', height: 50}} />
+      <Paper className={darkMode ? classes.paperDark : classes.paper}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Grid container justify='center'>
+              <img src={cover} alt={band} style={{height: 300, width: 300}}/>
             </Grid>
-            <Grid item>{band}</Grid>
           </Grid>
-        </Paper>
-        <Paper className={darkMode ? classes.paperDark : classes.paper}>
-          <Grid container spacing={3}>
-            {
-              albums.map(album => {
-                const link = `/albums/${band}/${album.name}`
-                const cover = '../img/covers/' + band.toLowerCase() + '_' + album.name.toLowerCase().replace(/\s/g, '') + '.jpg'
-                return (
-                  <Grid item xs={4}>
-                    <Grid container justify='center' style={{marginTop: 10}}>
-                      <Link to={link}>
-                        <img src={cover} alt={album.name} style={{width: 300, height: 300}}/>
-                      </Link>
-                      <p>{album.name} ({album.year})</p>
-                    </Grid>
-                  </Grid>
-                )
-              })
-            }
-          </Grid>
-        </Paper>
-      </main>
-    )
+        </Grid>
+      </Paper>
+      <Paper className={darkMode ? classes.paperDark : classes.paper}>
+        <Typography>Track list:</Typography>
+        {
+          trackList.map((name, index) => {
+            return (
+              <p>{index+1}. {name}</p>            
+            )
+          })
+        }
+      </Paper>
+    </main>
+)
   }
 }
 
-export default withStyles(styles)(BandPage)
+export default withStyles(styles)(AlbumPage)

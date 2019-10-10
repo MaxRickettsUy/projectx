@@ -1,3 +1,4 @@
+import AlbumPage from '../component/AlbumPage'
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar'
 import BandPage from '../component/BandPage'
@@ -252,6 +253,7 @@ class MainContainer extends React.Component {
                     </main>
                   </Route>
                   <Route exact path="/bands/Siege" render={() => {return <BandPage darkMode={darkMode}/>}}/>
+                  <Route exact path="/albums/Siege/Drop Dead" render={() => {return <AlbumPage darkMode={darkMode}/>}}/>
                 </Switch>
                 <Drawer
                   variant="permanent"
