@@ -27,7 +27,7 @@ class RightDrawerItems extends React.Component {
               return (
                 <Link key={band.bandName} to={link}>
                   <ListItem button>
-                    <Avatar src={require(darkMode ? '../img/garage-bandWhite.png' : '../img/garage-band.png')}/>
+                    <Avatar src={darkMode ? '/img/garage-bandWhite.png' : '/img/garage-band.png'}/>
                     <ListItemText style={{marginLeft: 10}} primary={band.bandName} />
                   </ListItem>
                 </Link>

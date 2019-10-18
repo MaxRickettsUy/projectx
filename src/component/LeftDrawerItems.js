@@ -48,7 +48,7 @@ class LeftDrawerItems extends React.Component {
           component="nav"
         >
           <ListItem button onClick={this.handleClick}>
-            <Avatar src={require(darkMode ? '../img/garage-bandWhite.png' : '../img/garage-band.png')}/>
+            <Avatar src={darkMode ? '/img/garage-bandWhite.png' : '/img/garage-band.png'}/>
             <ListItemText className={classes.listItemText} primary="Bands" />
             {this.state.open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
@@ -75,16 +75,16 @@ class LeftDrawerItems extends React.Component {
             </List>
           </Collapse>
           <ListItem button>
-            <Avatar src={require(darkMode ? '../img/vinylWhite.png' : '../img/vinyl.png')}/>
+            <Avatar src={darkMode ? '/img/vinylWhite.png' : '/img/vinyl.png'}/>
             <ListItemText className={classes.listItemText} primary="Labels" />
           </ListItem>
           <ListItem button>
-            <Avatar src={require(darkMode ? '../img/documentWhite.png' : '../img/document.png')}/>
+            <Avatar src={darkMode ? '/img/documentWhite.png' : '/img/document.png'}/>
             <ListItemText className={classes.listItemText} primary="Reviews" />
           </ListItem>
           <Divider />
           <ListItem button>
-            <Avatar src={require(darkMode ? '../img/question-markWhite.png' : '../img/question-mark.png')}/>
+            <Avatar src={darkMode ? '/img/question-markWhite.png' : '/img/question-mark.png'}/>
             <ListItemText className={classes.listItemText} primary='Random Band' />
           </ListItem>
         </List>

@@ -132,7 +132,7 @@ class BandPage extends React.Component {
           <Grid container spacing={3} justify='center'>
             <Grid item xs={12}>
               <Grid container justify='center'>
-                <img src={require('../img/logo/siege.jpg')} alt='Siege'/>
+                <img src={'/img/logo/siege.jpg'} alt='Siege'/>
               </Grid>
             </Grid>
             <Grid item>{band}</Grid>
@@ -143,7 +143,7 @@ class BandPage extends React.Component {
             {
               albums.map(album => {
                 const link = `/albums/${band}/${album.name}`
-                const cover = '../img/covers/' + band.toLowerCase() + '_' + album.name.toLowerCase().replace(/\s/g, '') + '.jpg'
+                const cover = '/img/covers/' + band.toLowerCase() + '_' + album.name.toLowerCase().replace(/\s/g, '') + '.jpg'
                 return (
                   <Grid item xs={4}>
                     <Grid container justify='center' style={{marginTop: 10}}>

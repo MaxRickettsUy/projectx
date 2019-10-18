@@ -97,8 +97,8 @@ class TopBar extends React.Component {
         <div>
           <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
-              <Link href='/' underline='none' color='inherit'>
-                <Typography className={this.props.classes.title} noWrap>
+              <Link className={this.props.classes.title} href='/' underline='none' color='inherit'>
+                <Typography noWrap>
                   {isMobile ? 'hXc' : 'hardXchives'}
                 </Typography>
               </Link>

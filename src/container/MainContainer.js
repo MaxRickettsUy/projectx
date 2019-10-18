@@ -157,7 +157,7 @@ class MainContainer extends React.Component {
                         <Grid container justify='center' spacing={2}>
                           <Grid item xs={12}>
                             <Paper className={classes.paperBand}>
-                              <Link to='/bands/Siege'><img src={require('../img/logo/siege.jpg')} alt='Siege' className={classes.paperBandImage}/></Link>
+                              <Link to='/bands/Siege'><img src={'/img/logo/siege.jpg'} alt='Siege' className={classes.paperBandImage}/></Link>
                             </Paper>
                           </Grid>
                           <Grid item xs={12}><Paper className={classes.paperBand}/></Grid>
@@ -174,22 +174,22 @@ class MainContainer extends React.Component {
                     <Grid container>
                       <Grid item xs={3}>
                         <Grid container justify='center'>
-                          <Button><Avatar src={require('../img/garage-bandWhite.png')}/></Button>
+                          <Button><Avatar src={'/img/garage-bandWhite.png'}/></Button>
                         </Grid>
                       </Grid>
                       <Grid item xs={3}>
                         <Grid container justify='center'>
-                          <Button><Avatar src={require('../img/vinylWhite.png')}/></Button>
+                          <Button><Avatar src={'/img/vinylWhite.png'}/></Button>
                         </Grid>
                       </Grid>
                       <Grid item xs={3}>
                         <Grid container justify='center'>
-                          <Button><Avatar src={require('../img/documentWhite.png')}/></Button>
+                          <Button><Avatar src={'/img/documentWhite.png'}/></Button>
                         </Grid>
                       </Grid>
                       <Grid item xs={3}>
                         <Grid container justify='center'>
-                          <Button><Avatar src={require('../img/question-markWhite.png')}/></Button>
+                          <Button><Avatar src={'/img/question-markWhite.png'}/></Button>
                         </Grid>
                       </Grid>
                     </Grid>                
@@ -228,7 +228,7 @@ class MainContainer extends React.Component {
                             <Grid container justify='center' spacing={2}>
                               <Grid item xs={3}>
                                 <Paper className={classes.paperBand}>
-                                  <Link to="/bands/Siege"><img src={require('../img/logo/siege.jpg')} alt='Siege' className={classes.paperBandImage}/></Link>
+                                  <Link to="/bands/Siege"><img src={'/img/logo/siege.jpg'} alt='Siege' className={classes.paperBandImage}/></Link>
                                 </Paper>
                               </Grid>
                               <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>

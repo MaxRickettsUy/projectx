@@ -107,7 +107,7 @@ class AlbumPage extends React.Component {
 
     const band = 'Siege'
     const albumName = 'Drop Dead'
-    const cover = '../../img/covers/' + band.toLowerCase() + '_' + albumName.toLowerCase().replace(/\s/g, '') + '.jpg'
+    const cover = '/img/covers/' + band.toLowerCase() + '_' + albumName.toLowerCase().replace(/\s/g, '') + '.jpg'
     const trackList = [
       'Drop Dead',
       'Conform',
