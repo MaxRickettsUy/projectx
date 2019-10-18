@@ -1,4 +1,5 @@
 import Avatar from '@material-ui/core/Avatar'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem';
@@ -8,11 +9,7 @@ import {BrowserRouter ,Route, Link, Switch} from 'react-router-dom';
 
 class RightDrawerItems extends React.Component {
   render() {
-    const {darkMode} = this.props
-    
-    //retrieve most recently updated bands from api
-    //and replace array with
-    const bands = ['Siege', 'Bane', '7 Seconds'] 
+    const {bands, darkMode} = this.props
 
     return(
       <React.Fragment>
@@ -22,13 +19,16 @@ class RightDrawerItems extends React.Component {
           </ListItem>
           <Divider/>
           {
-            bands.map(band => {
-              const link = `/bands/${band}`
+            bands === undefined ? 
+            <CircularProgress />
+            :
+            bands.map((band) => {
+              const link = `/bands/${band.bandName}`
               return (
-                <Link to={link}>
+                <Link key={band.bandName} to={link}>
                   <ListItem button>
                     <Avatar src={require(darkMode ? '../img/garage-bandWhite.png' : '../img/garage-band.png')}/>
-                    <ListItemText style={{marginLeft: 10}} primary={band} />
+                    <ListItemText style={{marginLeft: 10}} primary={band.bandName} />
                   </ListItem>
                 </Link>
               )

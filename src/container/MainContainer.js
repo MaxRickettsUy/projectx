@@ -122,6 +122,10 @@ class MainContainer extends React.Component {
     })
   }
 
+  componentDidMount = () => {
+    this.props.getBands()
+  }
+
   render(){
     const isMobile = window.innerWidth <= 500
     const { classes, getBandName } = this.props;
@@ -264,7 +268,7 @@ class MainContainer extends React.Component {
                   style={{height: '100vh'}}
                 >
                   <div className={classes.toolbar} />
-                  <RightDrawerItems darkMode={darkMode}/>
+                  <RightDrawerItems getBands={this.props.getBands} bands={this.props.bands} darkMode={darkMode}/>
                 </Drawer>
               </React.Fragment>
           }
@@ -279,7 +283,8 @@ MainContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  ...state
+  ...state,
+  bands: state.bands.bands
 })
 
 const mapDispatchToProps = (dispatch) => ({
