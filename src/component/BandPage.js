@@ -1,6 +1,6 @@
-import AlbumPage from './AlbumPage'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Grid from '@material-ui/core/Grid'
-import {BrowserRouter, Route, Link, Switch} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
@@ -106,24 +106,14 @@ class BandPage extends React.Component {
     return value.replace(/\s/g, '');
   }
 
+  componentDidMount = () => {
+    this.props.getAlbumsForBand(this.props.bandName)
+  }
+
   render(){
-    const {classes, darkMode} = this.props
+    const {albums, bandName, classes, darkMode} = this.props
 
-    //replace with band prop
-    const band = 'Siege'
-
-
-    //replace with album information for band from api
-    const albums = [
-      {
-        name: 'Drop Dead', 
-        year: 1984
-      },
-      {
-        name: 'Lost Session 91',
-        year: 2014
-      }
-    ]
+    const bandLogo = '/img/logo/' + bandName.toLowerCase() + '.jpg'
 
     return(
       <main className={darkMode ? classes.contentDark : classes.content}>
@@ -132,29 +122,32 @@ class BandPage extends React.Component {
           <Grid container spacing={3} justify='center'>
             <Grid item xs={12}>
               <Grid container justify='center'>
-                <img src={'/img/logo/siege.jpg'} alt='Siege'/>
+                <img src={bandLogo} alt={bandName}/>
               </Grid>
             </Grid>
-            <Grid item>{band}</Grid>
+            <Grid item>{bandName}</Grid>
           </Grid>
         </Paper>
         <Paper className={darkMode ? classes.paperDark : classes.paper}>
           <Grid container spacing={3}>
             {
-              albums.map(album => {
-                const link = `/albums/${band}/${album.name}`
-                const cover = '/img/covers/' + band.toLowerCase() + '_' + album.name.toLowerCase().replace(/\s/g, '') + '.jpg'
-                return (
-                  <Grid item xs={4}>
-                    <Grid container justify='center' style={{marginTop: 10}}>
-                      <Link to={link}>
-                        <img src={cover} alt={album.name} style={{width: 300, height: 300}}/>
-                      </Link>
-                      <p>{album.name} ({album.year})</p>
+              albums === undefined ? 
+                <CircularProgress />
+                :
+                albums.map(album => {
+                  const link = `/albums/${bandName}/${album.albumName}`
+                  const cover = '/img/covers/' + bandName.toLowerCase() + '_' + album.albumName.toLowerCase().replace(/\s/g, '') + '.jpg'
+                  return (
+                    <Grid key={album.albumName} item xs={4}>
+                      <Grid container justify='center' style={{marginTop: 10}}>
+                        <Link to={link}>
+                          <img onClick={() => {this.props.setCurrentAlbum(album)}} src={cover} alt={album.albumName} style={{width: 300, height: 300}}/>
+                        </Link>
+                        <p>{album.albumName} ({album.year})</p>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                )
-              })
+                  )
+                })
             }
           </Grid>
         </Paper>

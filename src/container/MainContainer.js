@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper'
 import PropTypes from 'prop-types';
 import React from 'react';
 import RightDrawerItems from '../component/RightDrawerItems'
+import {getAlbumsForBand} from '../actions/albums'
 import {getBands, getBandName} from '../actions/bands'
 import Toolbar from '@material-ui/core/Toolbar';
 import TopBar from '../component/TopBar'
@@ -112,7 +113,9 @@ const styles = theme => ({
 
 class MainContainer extends React.Component {
   state ={
-    darkMode: false
+    darkMode: false,
+    currentAlbum: {},
+    currentBand: {}
   }
 
   setDarkMode = () => {
@@ -122,6 +125,31 @@ class MainContainer extends React.Component {
     })
   }
 
+  setCurrentBand = (bandName) => {
+    const band = {
+      bandName: bandName
+    }
+    this.setState({
+      ...this.state,
+      currentBand : band
+    })
+  }
+
+  setCurrentAlbum = (album) => {
+    this.setState({
+      ...this.state,
+      currentAlbum: album
+    })
+  }
+
+  getAlbumPagePath = () => {
+    return `/albums/${this.state.currentBand.bandName}/${this.state.currentAlbum.albumName}`
+  }
+
+  getBandPagePath = () => {
+    return `/bands/${this.state.currentBand.bandName}`
+  }
+
   componentDidMount = () => {
     this.props.getBands()
   }
@@ -129,7 +157,7 @@ class MainContainer extends React.Component {
   render(){
     const isMobile = window.innerWidth <= 500
     const { classes, getBandName } = this.props;
-    const { currentBand, darkMode } = this.state;
+    const { darkMode } = this.state;
     return (
       <BrowserRouter>
         <div className={classes.root}>
@@ -157,7 +185,14 @@ class MainContainer extends React.Component {
                         <Grid container justify='center' spacing={2}>
                           <Grid item xs={12}>
                             <Paper className={classes.paperBand}>
-                              <Link to='/bands/Siege'><img src={'/img/logo/siege.jpg'} alt='Siege' className={classes.paperBandImage}/></Link>
+                              <Link to='/bands/Siege'>
+                                <img
+                                  onClick={() => {this.setCurrentBand('Siege')}} 
+                                  src={'/img/logo/siege.jpg'} 
+                                  alt='Siege' 
+                                  className={classes.paperBandImage}
+                                />
+                              </Link>
                             </Paper>
                           </Grid>
                           <Grid item xs={12}><Paper className={classes.paperBand}/></Grid>
@@ -167,7 +202,34 @@ class MainContainer extends React.Component {
                       </Paper>
                     </main>
                   </Route>
-                  <Route exact path='/bands/Siege' component={BandPage} darkMode={darkMode}/>
+                  <Route 
+                    exact 
+                    path={this.getBandPagePath()} 
+                    render={() => {
+                      return (
+                        <BandPage 
+                          setCurrentAlbum={this.setCurrentAlbum} 
+                          albums={this.props.albums} 
+                          getAlbumsForBand={this.props.getAlbumsForBand} 
+                          bandName={this.state.currentBand.bandName} 
+                          darkMode={darkMode}
+                        />
+                      )
+                    }}
+                  />
+                  <Route 
+                    exact 
+                    path={this.getAlbumPagePath()} 
+                    render={() => {
+                      return (
+                        <AlbumPage 
+                          band={this.state.currentBand} 
+                          album={this.state.currentAlbum} 
+                          darkMode={darkMode}
+                        />
+                      )
+                    }}
+                  />
                 </Switch>
                 <AppBar position='fixed' className={classes.bottomBar}>
                   <Toolbar>
@@ -228,7 +290,14 @@ class MainContainer extends React.Component {
                             <Grid container justify='center' spacing={2}>
                               <Grid item xs={3}>
                                 <Paper className={classes.paperBand}>
-                                  <Link to="/bands/Siege"><img src={'/img/logo/siege.jpg'} alt='Siege' className={classes.paperBandImage}/></Link>
+                                  <Link to="/bands/Siege">
+                                    <img 
+                                      onClick={() => {this.setCurrentBand('Siege')}} 
+                                      src={'/img/logo/siege.jpg'} 
+                                      alt='Siege' 
+                                      className={classes.paperBandImage}
+                                    />
+                                  </Link>
                                 </Paper>
                               </Grid>
                               <Grid item xs={3}><Paper className={classes.paperBand}/></Grid>
@@ -256,8 +325,34 @@ class MainContainer extends React.Component {
                       </Paper>
                     </main>
                   </Route>
-                  <Route exact path="/bands/Siege" render={() => {return <BandPage darkMode={darkMode}/>}}/>
-                  <Route exact path="/albums/Siege/Drop Dead" render={() => {return <AlbumPage darkMode={darkMode}/>}}/>
+                  <Route 
+                    exact 
+                    path={this.getBandPagePath()} 
+                    render={() => {
+                      return (
+                        <BandPage 
+                          setCurrentAlbum={this.setCurrentAlbum} 
+                          albums={this.props.albums} 
+                          getAlbumsForBand={this.props.getAlbumsForBand} 
+                          bandName={this.state.currentBand.bandName} 
+                          darkMode={darkMode}
+                        />
+                      )
+                    }}
+                  />
+                  <Route 
+                    exact 
+                    path={this.getAlbumPagePath()} 
+                    render={() => {
+                      return (
+                        <AlbumPage 
+                          band={this.state.currentBand} 
+                          album={this.state.currentAlbum} 
+                          darkMode={darkMode}
+                        />
+                      )
+                    }}
+                  />
                 </Switch>
                 <Drawer
                   variant="permanent"
@@ -268,7 +363,13 @@ class MainContainer extends React.Component {
                   style={{height: '100vh'}}
                 >
                   <div className={classes.toolbar} />
-                  <RightDrawerItems getBands={this.props.getBands} bands={this.props.bands} darkMode={darkMode}/>
+                  <RightDrawerItems
+                    setCurrentBand={this.setCurrentBand} 
+                    getBands={this.props.getBands} 
+                    bands={this.props.bands} 
+                    albums={this.props.albums} 
+                    darkMode={darkMode}
+                  />
                 </Drawer>
               </React.Fragment>
           }
@@ -284,12 +385,14 @@ MainContainer.propTypes = {
 
 const mapStateToProps = (state) => ({
   ...state,
-  bands: state.bands.bands
+  bands: state.bands.bands,
+  albums: state.albums.albums
 })
 
 const mapDispatchToProps = (dispatch) => ({
   getBands: () => dispatch(getBands()),
-  getBandName: (bandName) => dispatch(getBandName(bandName))
+  getBandName: (bandName) => dispatch(getBandName(bandName)),
+  getAlbumsForBand: (bandName) => dispatch(getAlbumsForBand(bandName))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MainContainer));

@@ -1,5 +1,4 @@
 import Grid from '@material-ui/core/Grid'
-import {BrowserRouter, Route, Link, Switch} from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import React from 'react';
 import Typography from '@material-ui/core/Typography'
@@ -103,20 +102,9 @@ class AlbumPage extends React.Component {
   }
 
   render(){
-    const {classes, darkMode} = this.props
+    const {album, band, classes, darkMode} = this.props
 
-    const band = 'Siege'
-    const albumName = 'Drop Dead'
-    const cover = '/img/covers/' + band.toLowerCase() + '_' + albumName.toLowerCase().replace(/\s/g, '') + '.jpg'
-    const trackList = [
-      'Drop Dead',
-      'Conform',
-      'Life of Hate',
-      'Starvation',
-      'Armageddon',
-      'Grim Reaper'
-    ]
-
+    const cover = '/img/covers/' + band.bandName.toLowerCase() + '_' + album.albumName.toLowerCase().replace(/\s/g, '') + '.jpg'
     return(
       <main className={darkMode ? classes.contentDark : classes.content}>
       <div style={{width: '100%', height: 50}} />
@@ -124,7 +112,7 @@ class AlbumPage extends React.Component {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Grid container justify='center'>
-              <img src={cover} alt={band} style={{height: 300, width: 300}}/>
+              <img src={cover} alt={band.bandName} style={{height: 300, width: 300}}/>
             </Grid>
           </Grid>
         </Grid>
@@ -132,9 +120,9 @@ class AlbumPage extends React.Component {
       <Paper className={darkMode ? classes.paperDark : classes.paper}>
         <Typography>Track list:</Typography>
         {
-          trackList.map((name, index) => {
+          album.tracks.map((track, index) => {
             return (
-              <p>{index+1}. {name}</p>            
+              <p key={track}>{index+1}. {track}</p>            
             )
           })
         }

@@ -5,7 +5,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import React from 'react';
-import {BrowserRouter ,Route, Link, Switch} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class RightDrawerItems extends React.Component {
   render() {
@@ -25,7 +25,7 @@ class RightDrawerItems extends React.Component {
             bands.map((band) => {
               const link = `/bands/${band.bandName}`
               return (
-                <Link key={band.bandName} to={link}>
+                <Link onClick={()=>{this.props.setCurrentBand(band.bandName)}} key={band.bandName} to={link}>
                   <ListItem button>
                     <Avatar src={darkMode ? '/img/garage-bandWhite.png' : '/img/garage-band.png'}/>
                     <ListItemText style={{marginLeft: 10}} primary={band.bandName} />
